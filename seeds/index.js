@@ -10,9 +10,9 @@ const apartmentsData = require('./apartment-seeds.json');
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
 
-  const apartments = await Apartments.bulkCreate(apartmentsData);
-  const issues = await Issues.bulkCreate(issuesData);
+  const apartments = await Apartment.bulkCreate(apartmentsData);
   const tenants = await Tenant.bulkCreate(tenantsData);
+  const issues = await Issues.bulkCreate(issuesData);
   const managers = await Manager.bulkCreate(managersData);
 
   for (const { apt_number } of apartments) {
@@ -21,7 +21,7 @@ const seedDatabase = async () => {
    });
  };
 
-   for (const { id } of tenants) {
+   for (const { apt_number } of tenants) {
       const newTenant = await Apartment.create({ apt_number: apt_number });
    };
 

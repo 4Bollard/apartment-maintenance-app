@@ -1,5 +1,5 @@
-const { Model, DataTypes } = require('sequilize');
-const sequilize = require('../config/connection');
+const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
 class Apartment extends Model {}
 
@@ -11,7 +11,7 @@ Apartment.init(
             primaryKey: true,
         },
         apt_number: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
         },
         layout: {
@@ -28,7 +28,7 @@ Apartment.init(
     },
 
     {
-        sequilize,
+        sequelize,
         timestamps: false,
         freezeTableName: true,
         underscored: true,
