@@ -1,9 +1,11 @@
 const router = require('express').Router()
+const { Tenant, Manager, Apartment, Issue, Handyman,  } = require("../../models");
+const bcrypt = require("bcrypt");
 
 ////
 // Routes to retrieve from the DB or save data to it and returns a response with JSON
 ////
-// endpoint: /api/account(andrew, look at miniproject for help )
+
 router.post('/', async (req, res) => {
   console.log(req.body); // TODO: Temporary outputting the request from the form of a new account being created until more of the project is completed, which will save the account information of user to DB
   try {
@@ -51,25 +53,25 @@ router.get('/issue/:id', async (req, res) => {
   // TODO need to create get all the issues in respect to request from the  DB
   console.log(req.body);
   try {
-    Issue.findByPk(req.params.id, {
-      include: [Apartment, Manager, Tenant]
+    const issuesData = await Issue.findByPk(req.params.id, {
+      include: [Manager, Tenant, Handyman]
     })
-    res.json({status: "Got the GET issue with ID successfully"});
+    res.json(issuesData);
   } catch (error) {
     res.status(500).json({status: Failed, payload: error.message})
   }
 })
 
 
-router.get('/issues', async (req, res) => {
-  // TODO need to create get all the issues in respect to request from the  DB
-  console.log(req.body);
-  try {
-    res.json({status: "Got the GET issues successfully"});
-  } catch (error) {
-    res.status(500).json({status: Failed, payload: error.message})
-  }
-})
+// router.get('/issues', async (req, res) => {
+//   // TODO need to create get all the issues in respect to request from the  DB
+//   console.log(req.body);
+//   try {
+//     res.json({status: "Got the GET issues successfully"});
+//   } catch (error) {
+//     res.status(500).json({status: Failed, payload: error.message})
+//   }
+// })
 
 function getHandyMan() {
   const table = [
