@@ -3,7 +3,7 @@ const router = require('express').Router()
 ////
 // Routes to retrieve from the DB or save data to it and returns a response with JSON
 ////
-
+// endpoint: /api/account(andrew, look at miniproject for help )
 router.post('/', async (req, res) => {
   console.log(req.body); // TODO: Temporary outputting the request from the form of a new account being created until more of the project is completed, which will save the account information of user to DB
   try {

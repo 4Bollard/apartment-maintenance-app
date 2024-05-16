@@ -17,7 +17,6 @@ router.get('/', (req, res) => {
 });
 
 router.get('/issue', (req, res) => {
-  // TODO: go to the issues page once it exists
   try {
     res.render('issue', {
       loggedIn: req.session.loggedIn,
